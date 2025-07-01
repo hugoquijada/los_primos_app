@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "559423514856",
+    "project_id": "losprimoshmo",
+    "storage_bucket": "losprimoshmo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559423514856:android:d4a5c6c86c23eec0ecc15d",
+        "android_client_info": {
+          "package_name": "com.example.los_primos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnGo_TDtS6VqNePRCDj7D9Umha0xv_rws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
