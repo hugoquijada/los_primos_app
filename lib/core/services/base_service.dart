@@ -9,9 +9,8 @@ class BaseService {
   int total = 0;
   //produccion: supergas.api.rdsistemas.app
 
-  String base_url = 'https://supergas.api.rdsistemas.app/distribuidor';
-  String baseUrl = 'supergas.api.rdsistemas.app';
-  String distribuidor = 'https://supergas.api.rdsistemas.app/distribuidor/';
+  String base_url = 'https://';
+  String baseUrl = '';
   String numeroVersion = '1.25.04.17';
 
   Future<Map<String, String>> getDefaultHeaders({withAuth = true}) async {
