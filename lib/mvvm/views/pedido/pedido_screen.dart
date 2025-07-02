@@ -15,16 +15,20 @@ class PedidoScreen extends StatefulWidget {
 
 class _PedidoScreenState extends State<PedidoScreen> {
 
-  void _mostrarSelectorProducto(BuildContext context, PedidoViewmodel viewModel) {
+  void _mostrarSelectorProducto(BuildContext context, PedidoViewmodel viewModel, { PedidoProducto? productoExistente, int? indexEditar }) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       builder: (context) {
         Producto? productoSeleccionado;
-        bool conAlga = false;
-        bool conBoneless = false;
         String? categoriaSeleccionada;
-        List<String> ingredientesElegidos = [];
+        if(productoExistente != null) {
+          productoSeleccionado = viewModel.productosDisponibles.firstWhere((p) => p.id == productoExistente.id);
+          categoriaSeleccionada = productoSeleccionado.categoria;
+        }
+        bool conAlga = productoExistente?.conAlga ?? false;
+        bool conBoneless = productoExistente?.conBoneless ?? false;
+        List<String> ingredientesElegidos = List.from(productoExistente?.ingredientes ?? []);
 
         return StatefulBuilder(
           builder: (context, setState) {
@@ -159,19 +163,24 @@ class _PedidoScreenState extends State<PedidoScreen> {
                           ElevatedButton(
                             onPressed: () {
                               if (productoSeleccionado != null) {
-                                viewModel.agregarProducto(
-                                  PedidoProducto(
-                                    id: productoSeleccionado!.id,
-                                    nombre: productoSeleccionado!.nombre,
-                                    categoria: productoSeleccionado!.categoria,
-                                    cantidad: 1,
-                                    esSushi: productoSeleccionado!.esSushi,
-                                    esArmable: productoSeleccionado!.esArmable,
-                                    conAlga: conAlga,
-                                    conBoneless: conBoneless,
-                                    ingredientes: ingredientesElegidos,
-                                  )
+
+                                final producto = PedidoProducto(
+                                  id: productoSeleccionado!.id,
+                                  nombre: productoSeleccionado!.nombre,
+                                  categoria: productoSeleccionado!.categoria,
+                                  cantidad: 1,
+                                  esSushi: productoSeleccionado!.esSushi,
+                                  esArmable: productoSeleccionado!.esArmable,
+                                  conAlga: conAlga,
+                                  conBoneless: conBoneless,
+                                  ingredientes: ingredientesElegidos,
                                 );
+
+                                if(indexEditar != null) {
+                                  viewModel.editarProducto(indexEditar, producto);
+                                } else {
+                                  viewModel.agregarProducto(producto);
+                                }
                                 
                                 setState(() {
                                   productoSeleccionado = null;
@@ -266,6 +275,9 @@ class _PedidoScreenState extends State<PedidoScreen> {
                       )
                     ),
                     trailing: Text("x ${p.cantidad}"),
+                    onTap: () {
+                      _mostrarSelectorProducto(context, vm, indexEditar: index, productoExistente: p);
+                    },
                   );
                 },
               ),

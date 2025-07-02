@@ -92,6 +92,11 @@ class PedidoViewmodel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void editarProducto(int index, PedidoProducto producto) {
+    productos[index] = producto;
+    notifyListeners();
+  }
+
   bool get puedeContinuar {
     if(tipoPedido == TipoPedido.aqui) {
       return mesa != null && mesa!.isNotEmpty;
