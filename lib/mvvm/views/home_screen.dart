@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'views.dart';
+import 'widgets/app_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -23,6 +24,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      drawer: AppDrawer(rutaActual: HomeScreen.ruta),
+      appBar: AppBar(
+        
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

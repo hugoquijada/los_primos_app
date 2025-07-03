@@ -14,6 +14,13 @@ final List<Ruta> rutas = [
     builder: (_) => LoginScreen()
   ),
   Ruta(
+    path: PedidoListaScreen.ruta,
+    builder: (_) => ChangeNotifierProvider(
+      create: (_) => PedidoViewmodel(),
+      child: PedidoListaScreen(),
+    )
+  ),
+  Ruta(
     path: PedidoScreen.ruta,
     builder: (_) => ChangeNotifierProvider(
       create: (_) => PedidoViewmodel(),

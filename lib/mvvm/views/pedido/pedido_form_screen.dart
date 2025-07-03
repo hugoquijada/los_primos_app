@@ -5,7 +5,7 @@ import '../../viewmodels/viewmodels.dart';
 import '../../../core/modelos/modelos.dart';
 
 class PedidoScreen extends StatefulWidget {
-  static String ruta = '/pedido';
+  static String ruta = '/pedido/form';
 
   const PedidoScreen({super.key});
 

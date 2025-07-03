@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../core/modelos/modelos.dart';
 
@@ -7,6 +8,7 @@ class PedidoViewmodel extends ChangeNotifier {
 
   TipoPedido? tipoPedido;
   String? mesa;
+  List<Pedido> pedidos = [];
   List<PedidoProducto> productos = [];
 
   List<String> categorias = [
@@ -89,6 +91,16 @@ class PedidoViewmodel extends ChangeNotifier {
 
   void agregarProducto(PedidoProducto producto) {
     productos.add(producto);
+    notifyListeners();
+  }
+
+  void cargarPedidos() async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('pedidos')
+        .orderBy('fecha', descending: true)
+        .get();
+
+    pedidos = snapshot.docs.map((doc) => Pedido.fromMap(doc.id, doc.data())).toList();
     notifyListeners();
   }
 
